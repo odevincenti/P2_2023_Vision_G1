@@ -45,7 +45,7 @@ imfull = iclose(imth, kcircle(3.5));
 imfull = iclose(imfull, ones(5, 5));
 % idisp(imfull)
 
-%% Detecto l�neas
+%% Detecto lineas
 %imth=imfoc>0.27;
 %imth = imfoc;
 edges = icanny(imfull);
@@ -61,30 +61,19 @@ k = find( lines.length > 25 & lines.length <= 60);
 % lines(k).plot('b--')
 % lines(k)
 
-%% Suprimo lineas segun angulo
-filtered_lines = [];
-for line = lines(k)
-    append = 1;
-    for fline = filtered_lines
-        if (line.theta > fline.theta - 0.1 && line.theta < fline.theta + 0.1)
-            append = 0;
-            break
-        end
-    end
-    if append == 1
-        filtered_lines = [filtered_lines, line];
-    end
-end
+% Suprimo lineas segun angulo
+filtered_lines = filter_lines(lines(k))
+filtered_lines.plot('b--')
 
-% filtered_lines.plot('b--')
-% filtered_lines
+%% Chequeo triangulos
+tri_lines = find_triangle(filtered_lines)
+idisp(imfull, 'dark');
+tri_lines.plot('b--')
 
-
-%% Corrijo orientaci�n
-im=im(f.vmin:f.vmax, f.umin:f.umax);
-imcorr = irotate(im, filtered_lines(2).theta*180/pi);
+%% Corrijo orientacion
+% im=im(f.vmin:f.vmax, f.umin:f.umax);
+% imcorr = irotate(im, filtered_lines(3).theta*180/pi);
 % idisp(imcorr)
-
 
 %% Busco nuevamente el centroide nuevamente para pasar el numero
 imblack=imcorr>0.9;         % Aplico threshold que vuelve casi todo negro
