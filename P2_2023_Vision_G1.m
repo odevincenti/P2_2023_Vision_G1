@@ -45,7 +45,7 @@ imfull = iclose(imth, kcircle(3.5));
 imfull = iclose(imfull, ones(5, 5));
 idisp(imfull)
 
-%% Detecto líneas
+%% Detecto lï¿½neas
 %imth=imfoc>0.27;
 %imth = imfoc;
 edges = icanny(imfull);
@@ -80,7 +80,7 @@ filtered_lines.plot('b--')
 filtered_lines
 % AGREGAR CHECK DE TRIANGULOS
 
-%% Corrijo orientación
+%% Corrijo orientaciï¿½n
 im=im(f.vmin:f.vmax, f.umin:f.umax);
 imcorr = irotate(im, filtered_lines(2).theta*180/pi);
 idisp(imcorr)
