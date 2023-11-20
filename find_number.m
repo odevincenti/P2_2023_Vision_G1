@@ -1,4 +1,4 @@
-function number = find_number(template, number_x)
+function [number, coincidence] = find_number(template, number_x)
 
 
 %Lista de numeros
@@ -36,6 +36,5 @@ end
 
 
 % Encontrar el valor más alto en la matriz
-[maxCoincidence, indice] = max(vector_coincidence);
+[coincidence, number] = max(vector_coincidence);
 
-number = indice;
