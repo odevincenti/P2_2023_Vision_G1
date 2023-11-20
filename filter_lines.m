@@ -5,6 +5,7 @@ function filtered_lines = filter_lines(lines)
     for line = lines            % Iteramos sobre las lineas
         append = 1;
         for fline = filtered_lines    % Iteramos sobre las lineas guardadas
+            % Si bien este proceso es O(n^2), son pocas lineas a analizar
             % Si los angulos son muy parecidos entre si
             if (line.theta > fline.theta - 0.1 && line.theta < fline.theta + 0.1)
                 append = 0;     % La nueva linea no sera guardada
