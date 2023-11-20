@@ -6,11 +6,11 @@ function tri_lines = find_triangle(filtered_lines)
             %fprintf('%i, %i', i, j)
             thetadiff = abs(filtered_lines(i).theta - filtered_lines(j).theta);
             if thetadiff > pi/3*0.9 && thetadiff < pi/3*1.1
-                if ~ismember(j, tri)
-                    tri = [tri, j];
-                end
                 if ~ismember(i, tri)
                     tri = [tri, i];
+                end
+                if ~ismember(j, tri)
+                    tri = [tri, j];
                 end
                 lentri = size(tri);
                 if lentri(2) == 3

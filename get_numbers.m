@@ -17,7 +17,7 @@ foto2=iconv(foto2,kgaus);
 
 grey1=imono(foto1);
 
-[H W] = size(grey1);
+[H, W] = size(grey1);
 
 nice=200;
 value=255/nice;
