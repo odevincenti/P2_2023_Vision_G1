@@ -7,6 +7,7 @@ function numbers = get_numbers()
 %   correspondiente a cada dado
 
 %% Carga de imagen
+% Se le aplica blur para poder identificar los numeros de los resultados
 kgaus=kgauss(0.6);
 foto1 = imread('template 1.jpg');
 foto1=iconv(foto1,kgaus);
@@ -14,11 +15,12 @@ foto2 = imread('template 2.jpg');
 foto2=iconv(foto2,kgaus);
 
 %%  Foto1
-
+% Comenzaremos analizando el template 1
 grey1=imono(foto1);
 
 [H, W] = size(grey1);
 
+% Le suvimos la luminosidad a la imagen
 nice=200;
 value=255/nice;
 for i = 1:H
@@ -31,6 +33,7 @@ for i = 1:H
     end
 end
 
+% Aplicamos threashold
 foto_threashold= grey1.*0;
 THRESHOLD=90;
 for i = 1:H
@@ -47,6 +50,8 @@ end
 
 numSize = 22;
 
+
+% Seleccionamos los numeros
 %********** NUMEROS **********
 % 20
 %                       Y     X
