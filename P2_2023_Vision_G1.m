@@ -9,7 +9,7 @@ close all
 clc
 
 %% Carga de imagen
-im=iread('resultado 14.jpg'); 
+im=iread('resultado 20.jpg'); 
 im=idouble(im);
 imon=imono(im);
 %ithresh(imon)
@@ -45,7 +45,7 @@ imfull = iclose(imth, kcircle(3.5));
 imfull = iclose(imfull, ones(5, 5));
 idisp(imfull)
 
-%% Detecto l�neas
+%% Detecto lineas
 %imth=imfoc>0.27;
 %imth = imfoc;
 edges = icanny(imfull);
@@ -61,26 +61,16 @@ k = find( lines.length > 25 & lines.length <= 60);
 % lines(k).plot('b--')
 % lines(k)
 
-%% Suprimo lineas segun angulo
-filtered_lines = [];
-for line = lines(k)
-    append = 1;
-    for fline = filtered_lines
-        if (line.theta > fline.theta - 0.1 && line.theta < fline.theta + 0.1)
-            append = 0;
-            break
-        end
-    end
-    if append == 1
-        filtered_lines = [filtered_lines, line];
-    end
-end
-
+% Suprimo lineas segun angulo
+filtered_lines = filter_lines(lines(k))
 filtered_lines.plot('b--')
-filtered_lines
-% AGREGAR CHECK DE TRIANGULOS
 
-%% Corrijo orientaci�n
-im=im(f.vmin:f.vmax, f.umin:f.umax);
-imcorr = irotate(im, filtered_lines(2).theta*180/pi);
-idisp(imcorr)
+%% Chequeo triangulos
+tri_lines = find_triangle(filtered_lines)
+idisp(imfull, 'dark');
+tri_lines.plot('b--')
+
+%% Corrijo orientacion
+% im=im(f.vmin:f.vmax, f.umin:f.umax);
+% imcorr = irotate(im, filtered_lines(3).theta*180/pi);
+% idisp(imcorr)
